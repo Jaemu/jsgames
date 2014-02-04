@@ -24,6 +24,8 @@ References:
 
 **Javascript**
 
+[Awesome slideshow framework, because you know everyone else is going to use Google Presentation](http://lab.hakim.se/reveal-js/)
+
 [A re-introduction to JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript)
 
 [Introduction to the js module pattern](http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html)

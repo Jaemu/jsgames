@@ -12,7 +12,7 @@ A quick and dirty primer for creating canvas games with input and an animation l
 
 **Run it:**
 - Navigate into the folder with index.html
-- run 'python -m SimpleHTTPServer'
+- run `python -m SimpleHTTPServer`
 - go to localhost:8000 in your browser
 
 

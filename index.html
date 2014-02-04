@@ -1,0 +1,65 @@
+<html>
+	<head>
+		<style>
+			@import url(http://fonts.googleapis.com/css?family=Medula+One);
+			@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,300);
+			body{
+				overflow: hidden;
+				background-color: #22AEE5;
+				background-image: linear-gradient(0, rgba(255,255,255,0), rgba(255,255,255,.7));
+				background-repeat: no-repeat;
+				background-size: cover;
+				font: 16px/26px Helvetica, Helvetica Neue, Arial;
+			}
+			.container{
+				min-width: 95%;
+				min-height: 90%;
+			}
+			.clearfix:before,
+			.clearfix:after {
+			    content: " ";
+			    display: table;
+			}
+
+			.clearfix:after {
+			    clear: both;
+			}
+
+			.clearfix {
+			    *zoom: 1;
+			}
+			.fancy{
+				font-family: 'Roboto Slab', serif;
+			}
+			.footer{
+				background: #fff;
+				clear: both;
+				text-align: center;
+				border: solid 4px rgba(0,0,0,.5);
+			}
+			.canvas-container{
+				border: solid 1px #000;
+				background: #fff;
+				min-height: 80%;
+				max-width: 80%;
+				margin: 0 auto;
+				clear: both;
+				float: center;
+			}
+			.game{
+			}
+		</style> 
+	</head>
+	<body>
+		<div class="container clearfix">
+			<div class="canvas-container">
+				<canvas class="game"></canvas>
+			</div>
+		</div>
+		<footer>
+			<div class="footer container clearfix fancy">
+				<h2>(insert footer links here)</h2>
+			</div>
+		</footer>
+	</body>
+</html>

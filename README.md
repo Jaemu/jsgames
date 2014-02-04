@@ -43,4 +43,5 @@ References:
 
 [Compass: mixins for handling things like css transitions and vendor prefixes](http://compass-style.org/)
 
-
+**Productivity Soundtrack**
+[Grooveshark, open to suggestions as well](http://grooveshark.com/#!/playlist/GSD+2+0+Brogramming+101/94418579)

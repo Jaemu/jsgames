@@ -10,27 +10,27 @@ window.requestAnimFrame = (function(){
               };
 })();
 
-var CanvasGame = (function($){
+var CanvasGame = (function(){
 
 	//Global paramters for your game loop
 	//The purpose of these is to hold references to your game elements
 	//and things like jquery objects that are expensive to create on each loop
-	var init1,
-		init2,
-		init3,
-		$canvas,
+	var defaults = {
+		init1: {},
+		init2: {},
+		init3: {}
+		},
+		canvas,
 		context;
 
 	var init = function(params){
 		//This enables you to pass a js object
 		//as an argument to your game loop and initializes variables based on them.
-		this.init1 = params.init1 || {};
-		this.init2 = params.init2 || {};
-		this.init3 = params.init3 || {};
+		this.defaults = $.extend(defaults, params || {});
 
 		//Get the canvas element, grab the 2d context to be able to manipulate it from each of the helper functions
-		this.canvas = document.getElementById("canvas-name");
-	    this.context = canvas.getContext("2d");
+		this.canvas = document.getElementsByClassName('game');
+	    this.context = this.canvas[0].getContext("2d");
 
 	};
 
@@ -76,19 +76,20 @@ var CanvasGame = (function($){
 	};	
 
 
-})(jQuery);
+})();
 
 $(document).ready(function(){
-	var params = {
-		init1: 1,
-		init2: 2,
-		init3: 3
-	};
+	var $this = $(this),
+		local_defaults = {
+			init1: 1,
+			init2: 2,
+			init3: 3
+		};
 	//initialize module
-	var animloop = CanvasGame.init(params);
+	var animloop = CanvasGame.init(local_defaults);
 
 	//Register event listener on canvas element
-	this.on('click', '.canvas', function(e){
+	$this.on('click', '.game', function(e){
 		animloop.run(e);
 	});
 });

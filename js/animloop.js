@@ -64,7 +64,7 @@ var CanvasGame = (function($){
         //define position updating logic here
     }
 
-	function draw() {
+	var draw = function() {
 	  //define image drawing (read: context updating) logic here
 	}
 

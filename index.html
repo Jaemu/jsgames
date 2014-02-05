@@ -1,17 +1,21 @@
 <html>
 	<head>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="js/particle.js"></script>
 		<script src="js/animloop.js"></script>
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
 		<style>
 			@import url(http://fonts.googleapis.com/css?family=Medula+One);
 			@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,300);
 			body{
-				overflow: hidden;
+				overflow-x: hidden;
 				background-color: #f0f0f0;
 				background-repeat: no-repeat;
 				background-size: cover;
 				font: 16px/26px Helvetica, Helvetica Neue, Arial;
+			}
+			i{
+				color: #115E76;
 			}
 			.container{
 				min-width: 95%;
@@ -30,6 +34,14 @@
 			.clearfix {
 			    *zoom: 1;
 			}
+			.example{
+				color: #7B5800;
+				text-align: center;
+				font-size: 2em;
+				line-height: 1.2;
+				max-width: 500px;
+				margin: 0 auto;
+			}
 			.fancy{
 				font-family: 'Roboto Slab', serif;
 			}
@@ -39,6 +51,7 @@
 				clear: both;
 				text-align: center;
 				border: solid 4px #115E76;
+				max-height: 100px;
 			}
 			.canvas-container{
 				background: #25C8FB;
@@ -52,6 +65,24 @@
 			}
 			.game{
 			}
+			.list{
+				list-style: none;
+				text-align: left;
+			}
+			.start-button{
+				margin: 0 auto;
+				background: #39C25B;
+				border-radius: 30px;
+				font-size: 2em;
+				width: 30%;
+				height: 10%;
+				float: center;
+				text-align: center;
+				position: relative;
+			}
+			.start-text{
+				padding: 8% 0;
+			}
 		</style> 
 	</head>
 	<body>
@@ -60,8 +91,17 @@
 				<canvas id="game"></canvas>
 			</div>
 		</div>
+		<div class="example">
+			<h3 class="fancy">Some font-awesome icon font examples</h3>
+			<ul class="list">
+				<li>Currency: <i class="fa fa-money"></i></li>
+				<li>Social media: <i class="fa fa-facebook-square"></i></li>
+				<li>Email: <i class="fa fa-envelope-o"></i></li>
+			</ul>
+			<h5 class="fancy">Use font awesome for icons with font properties!</h5>
+		</div>
 		<footer>
-			<div class="footer container clearfix fancy">
+			<div class="footer clearfix fancy">
 				<h2>(insert footer links here)</h2>
 			</div>
 		</footer>

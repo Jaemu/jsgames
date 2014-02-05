@@ -22,28 +22,83 @@ var CanvasGame = (function(){
 		},
 		canvas,
 		context,
-		$container;
+		$container,
+		height = 0,
+		width = 0,
+		particles;
 
-	var init = function(params){
-
+	var init = function(params, e){
+		e.preventDefault();
 		//This enables you to pass a js object
 		//as an argument to your game loop and initializes variables based on them.
-		this.defaults = $.extend(defaults, params || {});
+		defaults = $.extend(defaults, params || {});
 
 		//Get the canvas element, grab the 2d context to be able to manipulate it from each of the helper functions
-		this.canvas = document.getElementById('game');
+		canvas = document.getElementById('game');
 		$container = $('.canvas-container');
 
 		//Set canvas height and width to size of container for responsive goodness
-		this.canvas.height = $container.innerHeight();
-		this.canvas.width = $container.innerWidth();
-	    this.context = this.canvas.getContext("2d");
+		canvas.height = 694;
+		canvas.width = $container.innerWidth();
+		console.log(canvas.height + ", " + canvas.width);
+	    context = canvas.getContext("2d");
 
+	    particles = [];
+	    var color = "";
+	    for(var i = 0; i < 3; i++) {
+	        var sub = Math.floor(100 + Math.random() * 156).toString(16);
+	        color += (sub.length == 1 ? "0" + sub : sub);
+	    }
+	    var count = 200;
+	    var angle = (Math.PI * 2) / count;
+	    while(count--) {
+	     
+	        var randomVelocity =  Math.random() * 5;
+	        var particleAngle = count * angle;
+	     
+	        particles[200-count-1] = new Particle(
+	            {x:e.offsetX, y:e.offsetY}, null,
+	            {
+	            x: Math.cos(particleAngle) * randomVelocity,
+	            y: Math.sin(particleAngle) * randomVelocity
+	            },'blue', true);
+	        particles[200-count-1].setColor(color);
+	      }
+	      run(e);
+	};
+
+	var plotParticles = function(){
+		var currentParticles = [];
+          for (var i = 0; i < particles.length; i++) {
+            var particle = particles[i];
+            var pos = particle.pos;
+         
+            // If we're out of bounds, drop this particle and move on to the next
+            if (pos.x <= 100 || pos.x >= canvas.width || pos.y <= 0 || pos.y >= canvas.height){
+                continue;
+            } 
+            else{
+                 // Move our particles
+            particle.move();
+         
+            // Add this particle to the list of current particles
+            currentParticles.push(particle);
+          }
+         
+          // Update our global particles, clearing room for old particles to be collected   
+        }      
+        particles = currentParticles;
+	};
+
+	var drawParticles = function(){
+		for (var i = 0; i < particles.length; i++) {
+            context.fillStyle = particles[i].color;
+            var position = particles[i].pos;
+            context.fillRect(position.x, position.y, 4, 4);
+        }
 	};
 
 	var run = function(e){
-		//Prevent the click event from performing its default behavior of propogating
-		e.preventDefault();
 		//Replace this if with your halt condition
 		//This can be replaced with a "while(true)", but this will have serious performance implications
 		if(particles.length > 1)
@@ -53,7 +108,7 @@ var CanvasGame = (function(){
 		  //Resets the canvas to its initial state	
           clear();
           //Update position of all elements on the canvas
-          update();
+          plotParticles();
           //Draw updated elements
           draw();
           //Add current context to the animation frame queue
@@ -70,17 +125,23 @@ var CanvasGame = (function(){
     };
    var update = function() {
         //define position updating logic here
-    }
+        plotParticles();
+    };
 
 	var draw = function() {
 	  //define image drawing (read: context updating) logic here
-	}
+	  drawParticles();
+	};
 
+	var clear = function(){
+		canvas.width = canvas.width;
+	};
+
+	
 	//This return statement should contain a js object
 	//of every "public" function for your module
 	return{
-		init: init,
-		run: run
+		init: init
 	};	
 
 
@@ -91,13 +152,13 @@ $(document).ready(function(){
 		local_defaults = {
 			init1: 1,
 			init2: 2,
-			init3: 3
-		};
+			init3: 3,
+			height: 694
+		};	
 	//initialize module
-	var animloop = CanvasGame.init(local_defaults);
 
 	//Register event listener on canvas element
-	$this.on('click', '.game', function(e){
-		animloop.run(e);
+	$this.on('click', '.canvas-container', function(e){
+		var anim = CanvasGame.init(local_defaults, e);
 	});
 });

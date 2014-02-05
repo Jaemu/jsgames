@@ -108,7 +108,7 @@ var CanvasGame = (function(){
 		  //Resets the canvas to its initial state	
           clear();
           //Update position of all elements on the canvas
-          plotParticles();
+          update();
           //Draw updated elements
           draw();
           //Add current context to the animation frame queue

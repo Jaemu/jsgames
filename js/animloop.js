@@ -2,12 +2,12 @@
 //http://www.paulirish.com/
 
 window.requestAnimFrame = (function(){
-      return  window.requestAnimationFrame       ||
-              window.webkitRequestAnimationFrame ||
-              window.mozRequestAnimationFrame    ||
-              function( callback ){
-                window.setTimeout(callback, 1000 / 60);
-              };
+	return  window.requestAnimationFrame       ||
+	      window.webkitRequestAnimationFrame ||
+	      window.mozRequestAnimationFrame    ||
+	      function( callback ){
+	        window.setTimeout(callback, 1000 / 60);
+	      };
 })();
 
 var CanvasGame = (function(){
@@ -21,16 +21,23 @@ var CanvasGame = (function(){
 		init3: {}
 		},
 		canvas,
-		context;
+		context,
+		$container;
 
 	var init = function(params){
+
 		//This enables you to pass a js object
 		//as an argument to your game loop and initializes variables based on them.
 		this.defaults = $.extend(defaults, params || {});
 
 		//Get the canvas element, grab the 2d context to be able to manipulate it from each of the helper functions
-		this.canvas = document.getElementsByClassName('game');
-	    this.context = this.canvas[0].getContext("2d");
+		this.canvas = document.getElementById('game');
+		$container = $('.canvas-container');
+
+		//Set canvas height and width to size of container for responsive goodness
+		this.canvas.height = $container.innerHeight();
+		this.canvas.width = $container.innerWidth();
+	    this.context = this.canvas.getContext("2d");
 
 	};
 
@@ -58,7 +65,8 @@ var CanvasGame = (function(){
 	};
 
 	var queue = function () {
-        window.requestAnimFrame(loop);
+		//Add the animation loop to the frame queue
+        window.requestAnimFrame(run);
     };
    var update = function() {
         //define position updating logic here

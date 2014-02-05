@@ -2,13 +2,13 @@
 	<head>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script src="js/animloop.js"></script>
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
 		<style>
 			@import url(http://fonts.googleapis.com/css?family=Medula+One);
 			@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,300);
 			body{
 				overflow: hidden;
-				background-color: #22AEE5;
-				background-image: linear-gradient(0, rgba(255,255,255,0), rgba(255,255,255,.7));
+				background-color: #f0f0f0;
 				background-repeat: no-repeat;
 				background-size: cover;
 				font: 16px/26px Helvetica, Helvetica Neue, Arial;
@@ -34,14 +34,16 @@
 				font-family: 'Roboto Slab', serif;
 			}
 			.footer{
-				background: #fff;
+				background: #88E1FC;
+				opacity: .8;
 				clear: both;
 				text-align: center;
-				border: solid 4px rgba(0,0,0,.5);
+				border: solid 4px #115E76;
 			}
 			.canvas-container{
-				border: solid 1px #000;
-				background: #fff;
+				background: #25C8FB;
+				opacity: .5;
+				box-shadow: 0px 5px 3px 3px #ccc;
 				min-height: 80%;
 				max-width: 80%;
 				margin: 0 auto;
@@ -55,7 +57,7 @@
 	<body>
 		<div class="container clearfix">
 			<div class="canvas-container">
-				<canvas class="game"></canvas>
+				<canvas id="game"></canvas>
 			</div>
 		</div>
 		<footer>

@@ -17,6 +17,9 @@ Disclaimer: The CSS has not been written with performance or cross-browser compa
 - run `python -m SimpleHTTPServer`
 - go to localhost:8000 in your browser
 
+**Common Pitfalls**
+- The height & width of your 2d context is not responsive.  Make sure you apply all the size attributes to your canvas before calling the 2d context.
+
 
 
 References:

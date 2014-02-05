@@ -37,6 +37,8 @@ References:
 
 [Rebecca Murphey's Javascript assessment repo](https://github.com/rmurphey/js-assessment)
 
+[An introduction to Require.js and asynchronous module loading](http://javascriptplayground.com/blog/2012/07/requirejs-amd-tutorial-introduction/)
+
 
 **CSS**
 

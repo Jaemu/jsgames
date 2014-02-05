@@ -39,6 +39,7 @@ References:
 
 [An introduction to Require.js and asynchronous module loading](http://javascriptplayground.com/blog/2012/07/requirejs-amd-tutorial-introduction/)
 
+[Javascript patterns by Addy Osmani -- free ebook with pattern examples](http://addyosmani.com/resources/essentialjsdesignpatterns/book/)
 
 **CSS**
 

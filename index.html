@@ -1,25 +1,32 @@
 <html>
 	<head>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script src="js/particle.js"></script>
-		<script src="js/animloop.js"></script>
+		<script src="http://code.createjs.com/createjs-2013.12.12.min.js"></script>
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<style>
 			@import url(http://fonts.googleapis.com/css?family=Medula+One);
 			@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,300);
 			body{
-				overflow-x: hidden;
+				overflow-y: hidden;
 				background-color: #f0f0f0;
 				background-repeat: no-repeat;
 				background-size: cover;
 				font: 16px/26px Helvetica, Helvetica Neue, Arial;
+				min-height:1000px;
 			}
 			i{
 				color: #115E76;
 			}
+
+			ul, li{
+				display:inline-block;
+				list-style: none;
+			}
 			.container{
 				min-width: 95%;
 				min-height: 90%;
+				padding:2%;
 			}
 			.clearfix:before,
 			.clearfix:after {
@@ -52,13 +59,18 @@
 				text-align: center;
 				border: solid 4px #115E76;
 				max-height: 100px;
+				position:static;
+				bottom:0;
+				left:0;
+				width:100%;
 			}
 			.canvas-container{
 				background: #25C8FB;
 				opacity: .5;
 				box-shadow: 0px 5px 3px 3px #ccc;
-				min-height: 80%;
-				max-width: 80%;
+				max-height: 80%;
+				min-height:60%;
+				min-width: 100%;
 				margin: 0 auto;
 				clear: both;
 				float: center;
@@ -83,27 +95,101 @@
 			.start-text{
 				padding: 8% 0;
 			}
-		</style> 
+
+			.carousel-container{
+				width:94%;
+				margin: 10px auto 10px auto;
+				height:120px;
+				border: solid 2px #000;
+				clear: both;
+				float: center;
+				box-shadow: inset 1px 1px 10px #777777;
+				overflow-x:scroll;
+
+			}
+			.carousel-pictures{
+				max-height: 120px;
+				overflow-x: scroll;
+				overflow-y:hidden;
+				min-width:200%;
+				margin:0 !important;
+			}
+			.image{
+				width:100px;
+				height:100px;
+				background:url('http://www.gravatar.com/avatar/e3615d7adad5a22aedb9358e8fa779ee.png') no-repeat center center fixed;
+				background-color: blue;
+				background-size: cover;
+				margin: 10px;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="container clearfix">
 			<div class="canvas-container">
-				<canvas id="game"></canvas>
+				<canvas id="canvas"></canvas>
 			</div>
-		</div>
-		<div class="example">
-			<h3 class="fancy">Some font-awesome icon font examples</h3>
-			<ul class="list">
-				<li>Currency: <i class="fa fa-money"></i></li>
-				<li>Social media: <i class="fa fa-facebook-square"></i></li>
-				<li>Email: <i class="fa fa-envelope-o"></i></li>
-			</ul>
-			<h5 class="fancy">Use font awesome for icons with font properties!</h5>
+				<div class="carousel-prompt">
+					<h3 class="prompt-text">Guess which painting?</h3>
+				</div>	
+				<div class="carousel-container clearfix" id="carousel">
+					<ul class="carousel-pictures">
+						<li id="image_1" class="image"></li>
+						<li id="image_2" class="image"></li>
+						<li id="image_3" class="image"></li>
+						<li id="image_4" class="image"></li>
+						<li id="image_5" class="image"></li>
+						<li id="image_6" class="image"></li>
+						<li id="image_7" class="image"></li>
+						<li id="image_8" class="image"></li>
+						<li id="image_9" class="image"></li>
+						<li id="image_10" class="image"></li>
+						<li id="image_11" class="image"></li>
+						<li id="image_12" class="image"></li>
+					</ul>
+				</div>
 		</div>
 		<footer>
 			<div class="footer clearfix fancy">
 				<h2>(insert footer links here)</h2>
 			</div>
 		</footer>
+		<script>
+		var carousel, stage, shape;
+		canvas = document.getElementById('canvas');
+		stage = new createjs.Stage(canvas);
+		shape = new createjs.Shape();
+		carousel = document.getElementById('carousel');
+		domElement = new createjs.DOMElement(carousel);
+		shape.graphics.beginFill('rgba(255,255,0,1)').drawRoundRect(0, 0, 120, 120, 10);
+		stage.addChild(shape);
+		stage.update();
+			var handleClick = function(e){
+				console.log('hi');
+				stage.removeAllChildren();
+
+				shape = new createjs.Shape();
+				shape.graphics.beginFill('rgba(0,255,0,1)').drawRoundRect(0, 0, 120, 120, 10);
+				stage.addChild(shape);
+				stage.update();
+			}
+			var clearCanvas = function(e){
+				console.log('hey');
+				
+				stage.removeAllChildren();
+				shape = new createjs.Shape();
+				shape.graphics.beginFill('rgba(255,0,0,1)').drawRoundRect(0, 0, 120, 120, 10);
+				stage.addChild(shape);
+				stage.update();
+			}
+			var _this = this;
+			$('#carousel').on('mouseup', function(e){
+				handleClick(e);
+			}).on('mouseover', clearCanvas)
+			.on('mouseout', handleClick);
+
+			
+		</script> 
 	</body>
+
 </html>

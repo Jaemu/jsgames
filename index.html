@@ -99,27 +99,29 @@
 			.carousel-container{
 				width:94%;
 				margin: 10px auto 10px auto;
-				height:120px;
+				max-height:120px;
 				border: solid 2px #000;
 				clear: both;
 				float: center;
 				box-shadow: inset 1px 1px 10px #777777;
 				overflow-x:scroll;
+				overflow-y:hidden;
 
 			}
 			.carousel-pictures{
 				max-height: 120px;
-				overflow-x: scroll;
+				overflow-x: auto;
 				overflow-y:hidden;
-				min-width:200%;
+				width:auto;
 				margin:0 !important;
+				min-width:200%;
 			}
 			.image{
 				width:100px;
 				height:100px;
-				background:url('http://www.gravatar.com/avatar/e3615d7adad5a22aedb9358e8fa779ee.png') no-repeat center center fixed;
-				background-color: blue;
-				background-size: cover;
+				background: transparent url(https://farm3.staticflickr.com/2179/2178246332_de07c10d6f_m.jpg) no-repeat center center scroll;
+				background-size: 100px 100px;
+				-webkit-background-size: cover;
 				margin: 10px;
 			}
 		</style>

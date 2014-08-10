@@ -33,23 +33,23 @@ var MPiece = (function($, createjs){
 			canvas.width = $('.canvas-container').width();
 			canvas.height = $('.canvas-container').height();
 			stage = new createjs.Stage(canvas);
+			stage.enableDOMEvents(true);
+			stage.enableMouseOver(60);
 			shape = new createjs.Shape();
 			var i = 0;
-			for(i; i < canvas.height; i+=10){
+			for(i; i < canvas.height; i+=20){
 				cover.push([]);
 				var j = 0;
-				for(j; j < canvas.width; j+=10){
+				for(j; j < canvas.width; j+=20){
 					cover[i] = [];
 					var temp = new createjs.Shape();
-					temp.x = j;
-					temp.y = i;
-					temp.graphics.beginFill('rgba(255,0,0,.5)').drawCircle(0, 0, 10);
+					temp.graphics.beginFill('rgba(0,0,0,1)').drawRect(j, i, 20, 20);
+					temp.addEventListener('mouseover', onMouseOver);
 					cover[i][j] = temp;
 					stage.addChild(temp);
 				}
 			}
 			
-			console.log('num children: ' + stage.getNumChildren());
 			
 			stage.update();
 			/*particle = new createjs.Shape();
@@ -59,6 +59,7 @@ var MPiece = (function($, createjs){
 			particle.graphics.beginFill('rgba(255,0,0,1)').drawCircle(0, 0, 40);
 			stage.addChild(particle);
 			*/
+			//createjs.Ticker.stageFPS('60');
 			createjs.Ticker.on("tick", tick);
 		};
 		var handleClick = function(e){
@@ -76,11 +77,17 @@ var MPiece = (function($, createjs){
 			stage.update();
 		};
 
-		var tick = function(e){
-			//particle.x = particle.x + 10;
-			//if (particle.x > stage.canvas.width) { particle.x = 0; }
-			stage.update(e);
-		};
+		var onMouseOver = function(event){
+			console.log('event:' + event);
+			var children = stage.getObjectsUnderPoint(stage.mouseX, stage.mouseY);
+			for(var i = 0; i < children.length; i++){
+				children[i].alpha -=.5;
+				}
+			};
+
+		function tick(event) {
+			stage.update(event);
+		}
 
 	return {
 		init: init

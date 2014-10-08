@@ -146,8 +146,12 @@
 				width: 100%;
 				margin-bottom:2em;
 			}
-			button{
-				border-radius:10px;
+			.game-options{
+				margin-left:30%;
+			}
+			.game-options>button{
+				width:160px;
+				padding:0 auto;
 			}
 		</style>
 	</head>
@@ -177,13 +181,13 @@
 			.on('click', '.start', function(){
 				$('.main').empty();
 				$.get('/views/game.mustache', function(data){
+					MPiece.init();
 					MPiece.defaults.template = window.Hogan.compile(data);
 					$('.main').html($.parseHTML(MPiece.defaults.template.render()));
 				});
-				$(document).trigger('gameLoaded');
 			})
 			.on('DOMSubtreeModified', function(){
-				if($('canvas')){
+				if(typeof $('#canvas') !== 'undefined'){
 					MPiece.onLoad();
 				}
 			})

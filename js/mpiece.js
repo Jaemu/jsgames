@@ -20,7 +20,6 @@ var MPiece = (function($, createjs, hogan){
 			.on('mouseover', clearCanvas)
 			.on('mouseout', handleClick);
 			*/
-			$(document).on('ready', onLoad);
 		};
 
 		var onLoad = function(e){

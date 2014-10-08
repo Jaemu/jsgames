@@ -3,6 +3,8 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script src="http://code.createjs.com/createjs-2013.12.12.min.js"></script>
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+		<link href="//cdnjs.cloudflare.com/ajax/libs/bootswatch/3.2.0+2/yeti/bootstrap.min.css" rel="stylesheet">
+		<script src="//cdnjs.cloudflare.com/ajax/libs/hogan.js/3.0.0/hogan.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<style>
 			@import url(http://fonts.googleapis.com/css?family=Medula+One);
@@ -13,7 +15,7 @@
 				background-repeat: no-repeat;
 				background-size: cover;
 				font: 16px/26px Helvetica, Helvetica Neue, Arial;
-				min-height:1000px;
+				min-height:500px;
 			}
 			i{
 				color: #115E76;
@@ -27,6 +29,7 @@
 				min-width: 95%;
 				min-height: 90%;
 				padding:2%;
+				overflow-y: hidden;
 			}
 			.clearfix:before,
 			.clearfix:after {
@@ -59,7 +62,7 @@
 				text-align: center;
 				border: solid 4px #115E76;
 				max-height: 100px;
-				position:static;
+				position:fixed;
 				bottom:0;
 				left:0;
 				width:100%;
@@ -79,20 +82,6 @@
 			.list{
 				list-style: none;
 				text-align: left;
-			}
-			.start-button{
-				margin: 0 auto;
-				background: #39C25B;
-				border-radius: 30px;
-				font-size: 2em;
-				width: 30%;
-				height: 10%;
-				float: center;
-				text-align: center;
-				position: relative;
-			}
-			.start-text{
-				padding: 8% 0;
 			}
 
 			.carousel-container{
@@ -122,45 +111,60 @@
 				background-size: 100px 100px;
 				-webkit-background-size: cover;
 				margin: 10px;
-				-webkit-transition: all .5s ease 0s;
+				-webkit-transition: all .2s ease 0s;
+				opacity:.5;
+				cursor: pointer;
 
 			}
 			.image:hover{
 				-ms-transform: scale(1.1,1.1); /* IE 9 */
 		    -webkit-transform: scale(1.1,1.1); /* Chrome, Safari, Opera */
 				transform: scale(1.1,1.1);
-				opacity: .5;
+				opacity: 1;
 			}
 			.prompt-text{
 				text-align:center;
 				width:100%;
 			}
+			.title{
+				margin:0 auto;
+				text-align: center;
+				width:100%;
+			}
+			.button{
+				width:30%;
+				margin:0 auto;
+				vertical-align: middle;
+				line-height: 1em;
+				margin-right:20px;
+			}
+			.start-main{
+				width: 30%;
+				margin:15% auto;
+			}
+			.btn{
+				width: 100%;
+				margin-bottom:2em;
+			}
+			button{
+				border-radius:10px;
+			}
 		</style>
 	</head>
-	<body>
-		<div class="container clearfix">
-			<div class="canvas-container">
-				<canvas id="canvas"></canvas>
-			</div>
-				<div class="carousel-prompt">
-					<h3 class="prompt-text">Guess which painting?</h3>
-				</div>	
-				<div class="carousel-container clearfix" id="carousel">
-					<ul class="carousel-pictures">
-						<li id="image_1" class="image"></li>
-						<li id="image_2" class="image"></li>
-						<li id="image_3" class="image"></li>
-						<li id="image_4" class="image"></li>
-						<li id="image_5" class="image"></li>
-						<li id="image_6" class="image"></li>
-						<li id="image_7" class="image"></li>
-						<li id="image_8" class="image"></li>
-						<li id="image_9" class="image"></li>
-						<li id="image_10" class="image"></li>
-						<li id="image_11" class="image"></li>
-						<li id="image_12" class="image"></li>
-					</ul>
+	<body class="home">
+		<div class="main container clearfix">
+			<div class="start-body">
+				<div class="start-title">
+					<h1 class="center title">Masterpiece project</h1>
 				</div>
+				<div class="start-main">
+					<div class="btn-group">
+					  <button type="button" class="btn btn-primary start">START</button>
+					  <button type="button" class="btn btn-primary rules">RULES</button>
+					  <button type="button" class="btn btn-primary high-scores">HIGH SCORES</button>
+					</div>
+				</div>
+			</div>
 		</div>
 		<footer>
 			<div class="footer clearfix fancy">
@@ -168,6 +172,22 @@
 			</div>
 		</footer>
 		<script src='/js/mpiece.js'></script>
+		<script>
+			$(document)
+			.on('click', '.start', function(){
+				$('.main').empty();
+				$.get('/views/game.mustache', function(data){
+					MPiece.defaults.template = window.Hogan.compile(data);
+					$('.main').html($.parseHTML(MPiece.defaults.template.render()));
+				});
+				$(document).trigger('gameLoaded');
+			})
+			.on('DOMSubtreeModified', function(){
+				if($('canvas')){
+					MPiece.onLoad();
+				}
+			})
+		</script>
 	</body>
 
 </html>

@@ -1,7 +1,7 @@
 /*
 To do -- make a scratcher game.  
 */
-var MPiece = (function($, createjs){
+var MPiece = (function($, createjs, hogan){
 	
 		var defaults = {
 			thing : 'hi'
@@ -15,7 +15,7 @@ var MPiece = (function($, createjs){
 
 		var init = function(params){
 			defaults = $.extend(defaults, params, {});
-
+			defaults.template = hogan.compile('../views/game.mustache');
 			/*$('#carousel').on('mouseup', this.handleClick)
 			.on('mouseover', clearCanvas)
 			.on('mouseout', handleClick);
@@ -78,7 +78,6 @@ var MPiece = (function($, createjs){
 		};
 
 		var onMouseOver = function(event){
-			console.log('event:' + event);
 			var children = stage.getObjectsUnderPoint(stage.mouseX, stage.mouseY);
 			for(var i = 0; i < children.length; i++){
 				children[i].alpha -=.5;
@@ -90,8 +89,9 @@ var MPiece = (function($, createjs){
 		}
 
 	return {
-		init: init
+		init: init,
+		defaults: defaults,
+		onLoad: onLoad
 	};
 
-})(jQuery, createjs);
-MPiece.init();
+})(jQuery, createjs, window.Hogan);
